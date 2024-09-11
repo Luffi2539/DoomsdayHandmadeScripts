@@ -32,5 +32,7 @@
 <img width="477" alt="image" src="https://github.com/user-attachments/assets/4b32c07d-db89-459a-bd99-93e6b3f2e2f0">
 
 Берем эти цифры и пихаем в скрипт вот сюда
-<img width="477" alt="image" src="https://github.com/user-attachments/assets/9dff18ce-8f18-45e5-b155-d2cf7418c263">
+
+<img width="232" alt="image" src="https://github.com/user-attachments/assets/5dd729f1-dbda-41aa-abee-18a640366d40">
+
 
