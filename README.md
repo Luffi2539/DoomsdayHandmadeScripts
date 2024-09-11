@@ -19,5 +19,6 @@
 # Шаг 3
 Помните мы программу скачали в шаге 1 - пришло ее время - ищем и запускаем - вам откроется окошко
 и в нем надо запустить Window Spy
-![image](https://github.com/user-attachments/assets/e61d7c61-d771-4515-b5d0-41b489de13cd)
+
+<img width="331" alt="image" src="https://github.com/user-attachments/assets/7d108ebe-72b9-460a-a436-f758963894cf">
 
