@@ -88,7 +88,7 @@ NewColors := []
 ; Цвета красной кнопки завершения охоты - если охота закончилось а вы все еще на экране с кнопкой выход
 ; жмите Ctrl+Shift+q и выйдя из скрипта сообщение скажет какой цвет был в пикселе - там стабильность высокая
 ; скорее всего будет только пара цветов
-HuntFinishedColors := [0xD29789, 0xD29689]
+HuntFinishedColors := [0xD29789, 0xD29788, 0xD29787, 0xD29689, 0xD29688, 0xD29687, 0xD29589, 0xD29588, 0xD29587]
 
 AddColor() {
     newColor := PixelGetColor(HuntProgressButtonX, HuntProgressButtonY) 
