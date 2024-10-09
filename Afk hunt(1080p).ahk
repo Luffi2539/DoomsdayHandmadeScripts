@@ -9,7 +9,7 @@ ExitFunc() {
         Str .= "|" . Value
         Str := LTrim(Str, "|")
     }
-    MsgBox(Str, 'Colors I found')
+    MsgBox(PixelGetColor(ExitHuntButtonX, ExitHuntButtonY), 'Colors I found')
     ExitApp
 }
 
@@ -26,6 +26,28 @@ WaitUntilColor(colors, x, y, interval := 1000)
             for index, color in colors { 
                 if (pixelColor == color) {
                     inProgress := true
+                } 
+            }
+
+            if (!inProgress) {
+                break
+            }
+        }
+}
+
+WaitUntilNoColor(colors, x, y, interval := 1000)
+{
+    Loop
+        {
+            Sleep(interval)
+
+            inProgress := true
+            
+            pixelColor := PixelGetColor(x, y)   
+
+            for index, color in colors { 
+                if (pixelColor == color) {
+                    inProgress := false
                 } 
             }
 
@@ -57,9 +79,16 @@ HuntEnterCancellationY := 806
 
 HuntProgressButtonX := 1315
 HuntProgressButtonY := 534
+
+ExitHuntButtonX := 1244
+ExitHuntButtonY := 956
 ; Цвета голубой штуки (между мигающими стрелочками) на плашке подбора
 HuntProgressButtonColors := [0x194746, 0x1C4E4D, 0x205655, 0x1C504F, 0x1C4F4D]
 NewColors := []
+; Цвета красной кнопки завершения охоты - если охота закончилось а вы все еще на экране с кнопкой выход
+; жмите Ctrl+Shift+q и выйдя из скрипта сообщение скажет какой цвет был в пикселе - там стабильность высокая
+; скорее всего будет только пара цветов
+HuntFinishedColors := [0xD29789, 0xD29689]
 
 AddColor() {
     newColor := PixelGetColor(HuntProgressButtonX, HuntProgressButtonY) 
@@ -75,7 +104,7 @@ AddColor() {
     }
 }
 
-MainWindow := "ahk_id 131244"
+MainWindow := "ahk_id 918514"
 
 WinActivate(MainWindow)
 WinWaitActive(MainWindow)
@@ -84,18 +113,14 @@ Sleep(500)
 
 Loop
  {
+    MouseClick("left", CampaignButtonPositionX, CampaignButtonPositionY)
+    Sleep(slowDelay)
+    MouseClick("left", HuntButtonPositionX, HuntButtonPositionY)
+    Sleep(slowDelay)
     MouseClick("left", StartHuntButtonPositionX, StartHuntButtonPositionY)
     Sleep(fastDelay)
-    AddColor()
-    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
-    Sleep(15000)
-    MouseClick("left", BackButtonPositionX, BackButtonPositionY)
+    WaitUntilNoColor(HuntFinishedColors, ExitHuntButtonX, ExitHuntButtonY)
     Sleep(slowDelay)
-    MouseClick("left", CampaignButtonPositionX, CampaignButtonPositionY)
-    Sleep(fastDelay)
-    MouseClick("left", HuntButtonPositionX, HuntButtonPositionY)
-    Sleep(fastDelay)
-    AddColor()
-    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
+    MouseClick("left", ExitHuntButtonX, ExitHuntButtonY)
     Sleep(slowDelay)
  }
