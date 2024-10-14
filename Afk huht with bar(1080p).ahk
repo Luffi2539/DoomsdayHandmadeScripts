@@ -41,10 +41,10 @@ BackButtonPositionX := 74
 BackButtonPositionY := 100
 HuntEnterCancellationX := 706
 HuntEnterCancellationY := 806
-HuntProgressButtonX := 429
-HuntProgressButtonY := 790
+HuntProgressButtonX := 440
+HuntProgressButtonY := 818
 ; Цвет желтой штуки на плашке поиска
-HuntProgressButtonColors := [0xFDEBA7]
+HuntProgressButtonColors := [0xFDEAA3]
 NewColors := []
 AddColor() {
     newColor := PixelGetColor(HuntProgressButtonX, HuntProgressButtonY) 
