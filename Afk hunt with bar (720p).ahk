@@ -45,10 +45,10 @@ BackButtonPositionY := 70
 HuntEnterCancellationX := 490
 HuntEnterCancellationY := 535
 
-HuntProgressButtonX := 287
-HuntProgressButtonY := 526
+HuntProgressButtonX := 294
+HuntProgressButtonY := 548
 ; Цвет желтой штуки на плашке поиска
-HuntProgressButtonColors := [0xFAE49F]
+HuntProgressButtonColors := [0xFCEAA2]
 
 MainWindow := "ahk_id 1049942"
 
