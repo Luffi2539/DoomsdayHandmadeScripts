@@ -1,4 +1,4 @@
-﻿#Requires AutoHotkey v2.0
+#Requires AutoHotkey v2.0
 CoordMode("Mouse", "Window")
 CoordMode("Pixel", "Window")
 ExitFunc() {
@@ -29,7 +29,7 @@ WaitUntilColor(colors, x, y, interval := 1000)
         }
 }
 ^+q::ExitFunc
-fastDelay := 500
+fastDelay := 300
 slowDelay := 1000
 CampaignButtonPositionX := 1309
 CampaignButtonPositionY := 1020
@@ -41,10 +41,10 @@ BackButtonPositionX := 74
 BackButtonPositionY := 100
 HuntEnterCancellationX := 706
 HuntEnterCancellationY := 806
-HuntProgressButtonX := 1315
-HuntProgressButtonY := 534
-; Цвета голубой штуки (между мигающими стрелочками) на плашке подбора
-HuntProgressButtonColors := [0x194746, 0x1C4E4D, 0x205655, 0x1C504F, 0x1C4F4D]
+HuntProgressButtonX := 429
+HuntProgressButtonY := 790
+; Цвет желтой штуки на плашке поиска
+HuntProgressButtonColors := [0xFDEBA7]
 NewColors := []
 AddColor() {
     newColor := PixelGetColor(HuntProgressButtonX, HuntProgressButtonY) 
@@ -59,24 +59,28 @@ AddColor() {
         NewColors.Push(newColor)
     }
 }
-MainWindow := "ahk_id 131244"
+MainWindow := "ahk_id 263142"
 WinActivate(MainWindow)
 WinWaitActive(MainWindow)
 Sleep(500)
+; MsgBox(PixelGetColor(HuntProgressButtonX, HuntProgressButtonY))
 Loop
  {
-    MouseClick("left", StartHuntButtonPositionX, StartHuntButtonPositionY)
-    Sleep(fastDelay)
-    AddColor()
-    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
-    Sleep(15000)
-    MouseClick("left", BackButtonPositionX, BackButtonPositionY)
-    Sleep(slowDelay)
     MouseClick("left", CampaignButtonPositionX, CampaignButtonPositionY)
     Sleep(fastDelay)
     MouseClick("left", HuntButtonPositionX, HuntButtonPositionY)
     Sleep(fastDelay)
-    AddColor()
-    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
+    MouseClick("left", StartHuntButtonPositionX, StartHuntButtonPositionY)
+    Sleep(fastDelay)
+    MouseClick("left", BackButtonPositionX, BackButtonPositionY)
+    Sleep(fastDelay)
+    MouseClick("left", BackButtonPositionX, BackButtonPositionY)
     Sleep(slowDelay)
+    AddColor()
+    Sleep(fastDelay)
+    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
+    MouseClick("left", HuntEnterCancellationX, HuntEnterCancellationY)
+    Sleep(slowDelay)
+    WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
+    Sleep(fastDelay)
  }
