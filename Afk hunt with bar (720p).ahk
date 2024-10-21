@@ -3,6 +3,16 @@
 CoordMode("Mouse", "Window")
 CoordMode("Pixel", "Window")
 
+ExitFunc() {
+    Str := ""
+    for Index, Value In NewColors {
+        Str .= "|" . Value
+        Str := LTrim(Str, "|")
+    }
+    MsgBox(Str, 'Colors I found')
+    ExitApp
+}
+
 WaitUntilColor(colors, x, y, interval := 1000)
 {
     Loop
@@ -25,7 +35,7 @@ WaitUntilColor(colors, x, y, interval := 1000)
         }
 }
 
-^+q::ExitApp
+^+q::ExitFunc
 
 fastDelay := 300
 slowDelay := 1000
@@ -49,7 +59,20 @@ HuntProgressButtonX := 294
 HuntProgressButtonY := 548
 ; Цвет желтой штуки на плашке поиска
 HuntProgressButtonColors := [0xFCEAA2]
-
+NewColors := []
+AddColor() {
+    newColor := PixelGetColor(HuntProgressButtonX, HuntProgressButtonY) 
+    isIn := false
+    for index, oldColor in HuntProgressButtonColors {
+        if (newColor == oldColor) {
+            isIn := true
+        }
+    }
+    if(!isIn) {
+        HuntProgressButtonColors.Push(newColor)
+        NewColors.Push(newColor)
+    }
+}
 MainWindow := "ahk_id 1049942"
 
 WinActivate(MainWindow)
@@ -71,6 +94,9 @@ Loop
     Sleep(fastDelay)
     MouseClick("left", BackButtonPositionX, BackButtonPositionY)
     Sleep(slowDelay)
+    Sleep(slowDelay)
+    AddColor()
+    Sleep(fastDelay)
     WaitUntilColor(HuntProgressButtonColors, HuntProgressButtonX, HuntProgressButtonY)
     MouseClick("left", HuntEnterCancellationX, HuntEnterCancellationY)
     Sleep(slowDelay)
