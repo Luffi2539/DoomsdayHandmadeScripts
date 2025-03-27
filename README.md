@@ -7,7 +7,7 @@
 Поехали!
 
 # Шаг 1
-Скачать программу скрипта на (https://www.autohotkey.com/)[https://www.autohotkey.com/]
+Скачать программу скрипта на [AuthoHotkey.com](https://www.autohotkey.com/)
 Там жмем кнопку Download и выбираем v2
 Скачиваем файл и устанавливаем
 
